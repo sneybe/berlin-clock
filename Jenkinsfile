@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        jdk 'jdk7'
+        jdk 'jdk8'
         maven 'maven3'
     }
     stages {
@@ -12,7 +12,6 @@ pipeline {
             post {
                 always {
                     junit '**/target/*-reports/TEST-*.xml'
-                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
                 }
             }
         }
