@@ -1,21 +1,14 @@
 pipeline {
     agent any
-
     tools {
         jdk 'jdk8'
         maven 'maven3'
     }
-
     stages {
-        stage('install and sonar parallel') {
+        stage('Install') {
             steps {
-                parallel(install: {
-                    sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
-                }, sonar: {
-                    sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
-                })
+                sh "mvn clean test"
             }
-            
         }
     }
 }
